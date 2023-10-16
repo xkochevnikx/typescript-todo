@@ -1,8 +1,15 @@
+import { TodoItem } from './components/TodoItem';
+
 const App = () => {
     return (
-        <>
-            <h1>Hello</h1>
-        </>
+        <div className="App">
+            <TodoItem
+                id={'1'}
+                completed={true}
+                title={'init'}
+                style={{ color: 'red' }}
+            />
+        </div>
     );
 };
 
