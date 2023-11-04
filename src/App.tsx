@@ -1,26 +1,39 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import {
+    // ChangeEvent,
+    useEffect,
+    useState,
+} from 'react';
 import { TodoItem } from './components/TodoItem';
 import { NewTodoForm } from './components/NewTodoForm';
 import { TTodo } from './types';
 
 const App = () => {
-    const [text, setText] = useState('');
+    // const [text, setText] = useState('');
 
     const [todos, setTodos] = useState<TTodo[]>([]);
     console.log(todos);
 
-    const addTodo = () => {
+    // const addTodo = () => {
+    //     const newTodo: TTodo = {
+    //         id: Date.now().toString(),
+    //         title: text,
+    //         completed: false,
+    //     };
+    //     setTodos([...todos, newTodo]);
+    // };
+
+    const addTodoClick = (val: string) => {
         const newTodo: TTodo = {
             id: Date.now().toString(),
-            title: text,
+            title: val,
             completed: false,
         };
         setTodos([...todos, newTodo]);
     };
 
-    const handleClick = (event: ChangeEvent<HTMLInputElement>) => {
-        setText(event.target.value);
-    };
+    // const handleClick = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setText(event.target.value);
+    // };
 
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/todos')
@@ -31,13 +44,15 @@ const App = () => {
     return (
         <div className="App">
             <NewTodoForm
-                handleClick={handleClick}
-                addTodo={addTodo}
-                value={text}
+                onClickHandler={addTodoClick}
+                // handleClick={handleClick}
+                // addTodo={addTodo}
+                // value={text}
             />
 
             {todos.map((todo) => (
                 <TodoItem
+                    key={todo.id}
                     id={todo.id}
                     completed={todo.completed}
                     title={todo.title}
