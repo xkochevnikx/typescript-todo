@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { TodoItem } from './components/TodoItem';
+import { NewTodoForm } from './components/NewTodoForm';
 type TTodo = {
     id: string;
     title: string;
@@ -12,6 +13,14 @@ const App = () => {
 
     const [] = useState<TTodo | null>(null);
 
+    const addTodo = () => {
+        setTodos([...todos, text]);
+    };
+
+    const handleClick = (event: ChangeEvent<HTMLInputElement>) => {
+        setText(event.target.value);
+    };
+
     return (
         <div className="App">
             <TodoItem
@@ -19,6 +28,11 @@ const App = () => {
                 completed={true}
                 title={'init'}
                 style={{ color: 'red' }}
+            />
+            <NewTodoForm
+                handleClick={handleClick}
+                addTodo={addTodo}
+                value={text}
             />
         </div>
     );
