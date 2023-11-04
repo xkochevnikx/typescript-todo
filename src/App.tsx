@@ -1,17 +1,16 @@
-import {
-    // ChangeEvent,
-    // useEffect,
-    useState,
-} from 'react';
+import // ChangeEvent,
+// useEffect,
+// useState,
+'react';
 import { NewTodoForm } from './components/NewTodoForm';
-import { TTodo } from './types';
+// import { TTodo } from './types';
 import { TodoList } from './components/TodoList';
 
 const App = () => {
     // const [text, setText] = useState('');
 
-    const [todos, setTodos] = useState<TTodo[]>([]);
-    console.log(todos);
+    // const [todos, setTodos] = useState<TTodo[]>([]);
+    // console.log(todos);
 
     // const addTodo = () => {
     //     const newTodo: TTodo = {
@@ -22,33 +21,33 @@ const App = () => {
     //     setTodos([...todos, newTodo]);
     // };
 
-    const addTodoClick = (val: string) => {
-        const newTodo: TTodo = {
-            id: Date.now().toString(),
-            title: val,
-            completed: false,
-        };
-        setTodos([...todos, newTodo]);
-    };
+    // const addTodoClick = (val: string) => {
+    //     const newTodo: TTodo = {
+    //         id: Date.now().toString(),
+    //         title: val,
+    //         completed: false,
+    //     };
+    //     setTodos([...todos, newTodo]);
+    // };
 
-    const toggleTodo = (id: TTodo['id']) => {
-        setTodos(
-            todos.map((todo) => {
-                if (todo.id !== id) {
-                    return todo;
-                } else {
-                    return {
-                        ...todo,
-                        completed: !todo.completed,
-                    };
-                }
-            })
-        );
-    };
+    // const toggleTodo = (id: TTodo['id']) => {
+    //     setTodos(
+    //         todos.map((todo) => {
+    //             if (todo.id !== id) {
+    //                 return todo;
+    //             } else {
+    //                 return {
+    //                     ...todo,
+    //                     completed: !todo.completed,
+    //                 };
+    //             }
+    //         })
+    //     );
+    // };
 
-    const removeTodo = (id: TTodo['id']) => {
-        setTodos(todos.filter((todo) => todo.id !== id));
-    };
+    // const removeTodo = (id: TTodo['id']) => {
+    //     setTodos(todos.filter((todo) => todo.id !== id));
+    // };
 
     // const handleClick = (event: ChangeEvent<HTMLInputElement>) => {
     //     setText(event.target.value);
