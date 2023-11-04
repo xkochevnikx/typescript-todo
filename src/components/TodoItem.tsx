@@ -1,9 +1,7 @@
 import { CSSProperties, ReactNode } from 'react';
+import { TTodo } from '../types';
 
-interface TodoItemProps {
-    id: string;
-    title: string;
-    completed: boolean;
+interface TodoItemProps extends TTodo {
     children?: ReactNode;
     style?: CSSProperties;
 }

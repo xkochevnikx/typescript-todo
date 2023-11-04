@@ -1,39 +1,49 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { TodoItem } from './components/TodoItem';
 import { NewTodoForm } from './components/NewTodoForm';
-type TTodo = {
-    id: string;
-    title: string;
-    completed: boolean;
-};
+import { TTodo } from './types';
+
 const App = () => {
     const [text, setText] = useState('');
 
-    const [todos, setTodos] = useState<string[]>([]);
-
-    const [] = useState<TTodo | null>(null);
+    const [todos, setTodos] = useState<TTodo[]>([]);
+    console.log(todos);
 
     const addTodo = () => {
-        setTodos([...todos, text]);
+        const newTodo: TTodo = {
+            id: Date.now().toString(),
+            title: text,
+            completed: false,
+        };
+        setTodos([...todos, newTodo]);
     };
 
     const handleClick = (event: ChangeEvent<HTMLInputElement>) => {
         setText(event.target.value);
     };
 
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/todos')
+            .then((resp) => resp.json())
+            .then((data: TTodo[]) => setTodos(data));
+    }, []);
+
     return (
         <div className="App">
-            <TodoItem
-                id={'1'}
-                completed={true}
-                title={'init'}
-                style={{ color: 'red' }}
-            />
             <NewTodoForm
                 handleClick={handleClick}
                 addTodo={addTodo}
                 value={text}
             />
+
+            {todos.map((todo) => (
+                <TodoItem
+                    id={todo.id}
+                    completed={todo.completed}
+                    title={todo.title}
+                    style={{ color: 'red' }}
+                />
+            ))}
         </div>
     );
 };
