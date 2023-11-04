@@ -1,11 +1,11 @@
 import {
     // ChangeEvent,
-    useEffect,
+    // useEffect,
     useState,
 } from 'react';
-import { TodoItem } from './components/TodoItem';
 import { NewTodoForm } from './components/NewTodoForm';
 import { TTodo } from './types';
+import { TodoList } from './components/TodoList';
 
 const App = () => {
     // const [text, setText] = useState('');
@@ -31,15 +31,34 @@ const App = () => {
         setTodos([...todos, newTodo]);
     };
 
+    const toggleTodo = (id: TTodo['id']) => {
+        setTodos(
+            todos.map((todo) => {
+                if (todo.id !== id) {
+                    return todo;
+                } else {
+                    return {
+                        ...todo,
+                        completed: !todo.completed,
+                    };
+                }
+            })
+        );
+    };
+
+    const removeTodo = (id: TTodo['id']) => {
+        setTodos(todos.filter((todo) => todo.id !== id));
+    };
+
     // const handleClick = (event: ChangeEvent<HTMLInputElement>) => {
     //     setText(event.target.value);
     // };
 
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/todos')
-            .then((resp) => resp.json())
-            .then((data: TTodo[]) => setTodos(data));
-    }, []);
+    // useEffect(() => {
+    //     fetch('https://jsonplaceholder.typicode.com/todos')
+    //         .then((resp) => resp.json())
+    //         .then((data: TTodo[]) => setTodos(data));
+    // }, []);
 
     return (
         <div className="App">
@@ -49,16 +68,12 @@ const App = () => {
                 // addTodo={addTodo}
                 // value={text}
             />
-
-            {todos.map((todo) => (
-                <TodoItem
-                    key={todo.id}
-                    id={todo.id}
-                    completed={todo.completed}
-                    title={todo.title}
-                    style={{ color: 'red' }}
-                />
-            ))}
+            <TodoList
+                removeTodo={removeTodo}
+                toggleTodo={toggleTodo}
+                todos={todos}
+                style={{ color: 'red', display: 'flex', gap: 5 }}
+            />
         </div>
     );
 };

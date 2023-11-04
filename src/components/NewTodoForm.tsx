@@ -21,6 +21,7 @@ export const NewTodoForm = (props: INewTodoFormProps) => {
     const onClick = () => {
         if (inputRef.current) {
             onClickHandler(inputRef.current.value);
+            inputRef.current.value = '';
         }
     };
 
