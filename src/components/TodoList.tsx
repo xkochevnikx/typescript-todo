@@ -1,20 +1,28 @@
 import { CSSProperties } from 'react';
 import { TTodo } from '../types';
 import { TodoItem } from './TodoItem';
+import { useAppDispatch } from '../reduxHooks';
+import { removeTodo, toggleTodo } from '../store/todosSlice';
+import { todosSelectors } from '../store/todosSelector';
+import { useSelector } from 'react-redux';
 
 interface TodoListProps {
-    todos: TTodo[];
-    removeTodo: (id: TTodo['id']) => void;
-    toggleTodo: (id: TTodo['id']) => void;
     style?: CSSProperties;
 }
 
-export const TodoList = ({
-    todos,
-    style,
-    removeTodo,
-    toggleTodo,
-}: TodoListProps) => {
+export const TodoList = ({ style }: TodoListProps) => {
+    const todos = useSelector(todosSelectors);
+
+    const dispatch = useAppDispatch();
+
+    const removeTodoItem = (id: TTodo['id']) => {
+        dispatch(removeTodo(id));
+    };
+
+    const toggleTodoItem = (id: TTodo['id']) => {
+        dispatch(toggleTodo(id));
+    };
+
     return (
         <ul>
             {todos.map((todo) => (
@@ -22,8 +30,8 @@ export const TodoList = ({
                     key={todo.id}
                     {...todo}
                     style={style}
-                    removeTodo={removeTodo}
-                    toggleTodo={toggleTodo}
+                    removeTodoItem={removeTodoItem}
+                    toggleTodoItem={toggleTodoItem}
                 />
             ))}
         </ul>

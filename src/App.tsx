@@ -1,9 +1,11 @@
-import // ChangeEvent,
+// import
+// ChangeEvent,
 // useEffect,
 // useState,
-'react';
-import { NewTodoForm } from './components/NewTodoForm';
+// 'react';
 // import { TTodo } from './types';
+
+import { NewTodoItem } from './components/NewTodoItem';
 import { TodoList } from './components/TodoList';
 
 const App = () => {
@@ -61,18 +63,8 @@ const App = () => {
 
     return (
         <div className="App">
-            <NewTodoForm
-                onClickHandler={addTodoClick}
-                // handleClick={handleClick}
-                // addTodo={addTodo}
-                // value={text}
-            />
-            <TodoList
-                removeTodo={removeTodo}
-                toggleTodo={toggleTodo}
-                todos={todos}
-                style={{ color: 'red', display: 'flex', gap: 5 }}
-            />
+            <NewTodoItem />
+            <TodoList style={{ color: 'red', display: 'flex', gap: 5 }} />
         </div>
     );
 };

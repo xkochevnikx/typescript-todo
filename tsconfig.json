@@ -15,8 +15,7 @@
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
-        "jsx": "react-jsx",
-        "baseUrl": "./src"
+        "jsx": "react-jsx"
     },
     "include": ["./src/**/*"],
     "exclude": ["node_modules"]
