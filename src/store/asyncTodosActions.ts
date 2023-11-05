@@ -1,21 +1,24 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { TTodo } from '../types';
 
-export const asyncThunkTodos = createAsyncThunk('asyncThunkTodos', async () => {
-    try {
-        const response = await fetch(
-            'https://jsonplaceholder.typicode.com/todos'
-        );
+export const asyncThunkTodos = createAsyncThunk<TTodo[], undefined>(
+    'asyncThunkTodos',
+    async () => {
+        try {
+            const response = await fetch(
+                'https://jsonplaceholder.typicode.com/todos'
+            );
 
-        return await response.json();
-    } catch (error) {
-        throw new Error('error');
+            return await response.json();
+        } catch (error) {
+            throw new Error('error');
+        }
     }
-});
+);
 
-export const asyncCreateTodo = createAsyncThunk(
+export const asyncCreateTodo = createAsyncThunk<TTodo, string>(
     'asyncCreateTodo',
-    async (text: string) => {
+    async (text) => {
         const newTodo: Required<Omit<TTodo, 'id'>> = {
             title: text,
             userId: 1,
@@ -33,7 +36,7 @@ export const asyncCreateTodo = createAsyncThunk(
                 }
             );
 
-            return (await response.json()) as TTodo;
+            return await response.json();
         } catch (error) {
             throw new Error('error');
         }
