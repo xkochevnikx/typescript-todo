@@ -5,6 +5,8 @@
 // 'react';
 // import { TTodo } from './types';
 
+import { NewAsyncTodoItem } from './components/AsyncNewTodo';
+import { AsyncTodoList } from './components/AsyncTodoList';
 import { NewTodoItem } from './components/NewTodoItem';
 import { TodoList } from './components/TodoList';
 
@@ -65,6 +67,10 @@ const App = () => {
         <div className="App">
             <NewTodoItem />
             <TodoList style={{ color: 'red', display: 'flex', gap: 5 }} />
+
+            <hr />
+            <NewAsyncTodoItem />
+            <AsyncTodoList />
         </div>
     );
 };

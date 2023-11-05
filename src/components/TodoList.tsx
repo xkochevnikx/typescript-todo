@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 import { TTodo } from '../types';
 import { TodoItem } from './TodoItem';
-import { useAppDispatch } from '../reduxHooks';
+import { useAppDispatch } from '../store/reduxHooks';
 import { removeTodo, toggleTodo } from '../store/todosSlice';
 import { todosSelectors } from '../store/todosSelector';
 import { useSelector } from 'react-redux';

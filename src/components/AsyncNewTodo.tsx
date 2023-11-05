@@ -1,12 +1,13 @@
+import { asyncCreateTodo } from '../store/asyncTodosActions';
 import { useAppDispatch } from '../store/reduxHooks';
-import { addTodo } from '../store/todosSlice';
 import { NewTodoForm } from './NewTodoForm';
 
-export const NewTodoItem = () => {
+export const NewAsyncTodoItem = () => {
     const dispatch = useAppDispatch();
 
     const onClickHandler = (text: string) => {
-        dispatch(addTodo(text));
+        dispatch(asyncCreateTodo(text));
     };
+
     return <NewTodoForm onClickHandler={onClickHandler} />;
 };
