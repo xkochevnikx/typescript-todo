@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { asyncCreateTodo, asyncThunkTodos } from './asyncTodosActions';
+import { TTodo } from '../types';
 
 type TasyncTodosSliceTypes = {
-    todos: [];
+    todos: TTodo[];
     loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 };
 
@@ -14,7 +16,19 @@ const asyncTodosSlice = createSlice({
     name: 'asyncTodosSlice',
     initialState,
     reducers: {},
-    extraReducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(asyncThunkTodos.pending, (state) => {
+                state.loading = 'pending';
+            })
+            .addCase(asyncThunkTodos.fulfilled, (state, action) => {
+                state.loading = 'succeeded';
+                state.todos = action.payload;
+            })
+            .addCase(asyncCreateTodo.fulfilled, (state, action) => {
+                state.todos = [...state.todos, action.payload];
+            });
+    },
 });
 
 export default asyncTodosSlice.reducer;
